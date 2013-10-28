@@ -37,9 +37,15 @@ pacstrap -i /mnt base --noconfirm
 # Generate an fstab
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
+# Download chroot script
+wget ---
+mv --- /mnt/
+
 # Chroot and configure
-arch-chroot /mnt
+arch-chroot /mnt /bin/bash -c "./Afer-chroot.sh"
 
-echo testing
+# Umount all partitions
+umount -R /mnt
 
+echo voilá!
 
