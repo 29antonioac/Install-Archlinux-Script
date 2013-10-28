@@ -28,7 +28,7 @@ mount /dev/sda1 /mnt
 
 # Select a mirror
 echo "Selecting the mirror and updating pacman database..."
-echo "Server = http://osl.ugr.es/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
+echo 'Server = http://osl.ugr.es/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 pacman -Syy
 echo "Installing your system!"
 pacstrap -i /mnt base
