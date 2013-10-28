@@ -11,7 +11,6 @@ echo "Setting Terminus font..."
 setfont Lat2-Terminus16
 
 # Set locale and generate it/them
-echo "Generating locales..."
 echo es_ES.UTF-8 UTF-8 > /etc/locale.gen
 locale-gen
 export LANG=es_ES.UTF-8
@@ -26,9 +25,21 @@ export LANG=es_ES.UTF-8
 echo "Mounting partitions..."
 mount /dev/sda1 /mnt
 
-# Select a mirror
+# Select a mirror and update pacman database
 echo "Selecting the mirror and updating pacman database..."
 echo 'Server = http://osl.ugr.es/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 pacman -Syy
+
+# Install the base system
 echo "Installing your system!"
 pacstrap -i /mnt base --noconfirm
+
+# Generate an fstab
+genfstab -U -p /mnt >> /mnt/etc/fstab
+
+# Chroot and configure
+arch-chroot /mnt
+
+echo testing
+
+
