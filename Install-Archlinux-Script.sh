@@ -23,7 +23,7 @@ export LANG=es_ES.UTF-8
 
 # Mount the partitions
 echo "Mounting partitions..."
-mount /dev/sda1 /mnt
+mount /dev/sda1 /mnt && sleep 2
 
 # Select a mirror and update pacman database
 echo "Selecting the mirror and updating pacman database..."
