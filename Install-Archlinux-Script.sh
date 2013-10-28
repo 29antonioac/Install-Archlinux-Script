@@ -39,10 +39,10 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 
 # Download chroot script
 wget http://goo.gl/SdQi6D
-mv SdQi6D /mnt/Afer-chroot.sh
+mv SdQi6D /mnt/After-chroot.sh
 
 # Chroot and configure
-arch-chroot /mnt /bin/bash -c "./Afer-chroot.sh"
+arch-chroot /mnt /bin/bash -c "chmod u+x *.sh && ./After-chroot.sh"
 
 # Umount all partitions
 umount -R /mnt
