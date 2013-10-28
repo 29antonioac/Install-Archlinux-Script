@@ -38,8 +38,8 @@ pacstrap -i /mnt base --noconfirm
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 # Download chroot script
-wget ---
-mv --- /mnt/
+wget http://goo.gl/SdQi6D
+mv SdQi6D /mnt/Afer-chroot.sh
 
 # Chroot and configure
 arch-chroot /mnt /bin/bash -c "./Afer-chroot.sh"
