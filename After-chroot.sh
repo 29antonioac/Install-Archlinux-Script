@@ -28,7 +28,7 @@ ln -s /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 
 # Set UTC
 echo "Installing ntp and setting UTC..."
-pacman -S ntp && ntpd -qg
+pacman -S ntp --noconfirm && ntpd -qg
 hwclock --systohc --utc
 
 # Set hostname
@@ -44,7 +44,7 @@ mkinitcpio -p linux
 passwd
 
 # Install GRUB
-pacman -S grub os-prober
+pacman -S grub os-prober --noconfirm
 grub-install --target=i386-pc --recheck /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 
