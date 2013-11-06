@@ -19,30 +19,33 @@ export LANG=es_ES.UTF-8
 ########
 
 # Preparing storage devices
+mkfs.ext4 /dev/sda1
+mkfs.reiserfs /dev/sda2
 ########
 
 # Mount the partitions
 echo "Mounting partitions..."
-mount /dev/sda1 /mnt && sleep 2
+mount /dev/sda1 /mnt
+mkdir /mnt/var
+mount /dev/sda2 /mnt/var
 
 # Select a mirror and update pacman database
-echo "Selecting the mirror and updating pacman database..."
+echo "Selecting the osl mirror and updating pacman database..."
 echo 'Server = http://osl.ugr.es/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 pacman -Syy
 
 # Install the base system
 echo "Installing your system!"
-pacstrap -i /mnt base --noconfirm
+pacstrap -i /mnt base base-devel --noconfirm
 
 # Generate an fstab
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 # Download chroot script
-wget http://goo.gl/SdQi6D
-mv SdQi6D /mnt/After-chroot.sh
+wget http://goo.gl/SdQi6D -o /mnt/After-chroot.sh
 
 # Chroot and configure
-arch-chroot /mnt /bin/bash -c "chmod u+x *.sh && ./After-chroot.sh"
+arch-chroot /mnt /bin/bash -c "chmod u+x After-chroot.sh && ./After-chroot.sh"
 
 # Umount all partitions
 umount -R /mnt
