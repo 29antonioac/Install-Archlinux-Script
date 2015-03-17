@@ -17,7 +17,7 @@ echo FONT=Lat2-Terminus16 >> /etc/vconsole.conf
 
 # Set locales
 echo "Setting locales..."
-echo es_ES.UTF-8 UTF-8 > /etc/locale.gen
+sed -i.bak -e 's/#es_ES.UTF-8/es_ES.UTF-8/; s/en_US.UTF-8/#en_US.UTF-8/' /etc/locale.gen
 locale-gen
 echo LANG=es_ES.UTF-8 > /etc/locale.conf
 export LANG=es_ES.UTF-8

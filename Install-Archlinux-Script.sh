@@ -11,11 +11,11 @@ echo "Setting Terminus font..."
 setfont Lat2-Terminus16
 
 # Set locale and generate it/them
-echo es_ES.UTF-8 UTF-8 > /etc/locale.gen
+sed -i.bak -e 's/#es_ES.UTF-8/es_ES.UTF-8/; s/en_US.UTF-8/#en_US.UTF-8/' /etc/locale.gen
 locale-gen
 export LANG=es_ES.UTF-8
 
-# Establish an internet connection 
+# Establish an internet connection
 ########
 
 # Preparing storage devices
@@ -31,7 +31,7 @@ mount /dev/sda2 /mnt/var
 
 # Select a mirror and update pacman database
 echo "Selecting the osl mirror and updating pacman database..."
-echo 'Server = http://osl.ugr.es/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+sed -i.bak '1iServer = http://osl.ugr.es/archlinux/$repo/os/$arch' /etc/pacman.d/mirrorlist
 pacman -Syy
 
 # Install the base system
@@ -50,5 +50,4 @@ arch-chroot /mnt /bin/bash -c "chmod u+x After-chroot.sh && ./After-chroot.sh"
 # Umount all partitions
 umount -R /mnt
 
-echo voilá! Reboot your system and enjoy Archlinux!
-
+echo Voilá! Reboot your system and enjoy Archlinux!
