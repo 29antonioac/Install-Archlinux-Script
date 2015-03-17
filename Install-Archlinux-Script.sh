@@ -50,4 +50,4 @@ arch-chroot /mnt /bin/bash -c "chmod u+x After-chroot.sh && ./After-chroot.sh"
 # Umount all partitions
 umount -R /mnt
 
-echo Voilá! Reboot your system and enjoy Archlinux!
+echo "Voilá! Reboot your system and enjoy Archlinux!"

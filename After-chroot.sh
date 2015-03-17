@@ -32,7 +32,18 @@ pacman -S ntp --noconfirm && ntpd -qg
 hwclock --systohc --utc
 
 # Set hostname
-echo Antonio-Arch > /etc/hostname
+read -p "Type the hostname: " HOSTNAME
+echo $HOSTNAME > /etc/hostname
+
+# Check if user needs Wi-Fi
+read -p "Do you need Wi-Fi? (y/n): " WIFI
+while [ $WIFI -ne "y" ] || [ $WIFI -ne "n" ]; do
+  echo "I don't understand you."
+  read -p "Do you need Wi-Fi? (y/n): " WIFI
+
+if [ $WIFI -e "y" ]; then
+  echo "Installing wpa_supplicant and dialog for wifi-menu use..."
+  pacman -S wpa_supplicant dialog --noconfirm
 
 # Configure the network
 ########
