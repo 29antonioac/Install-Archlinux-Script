@@ -95,7 +95,7 @@ pacstrap -i /mnt base base-devel --noconfirm
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 # Download chroot script
-wget http://goo.gl/EVv7cm -O /mnt/After-chroot.sh
+wget http://goo.gl/SdQi6D -O /mnt/After-chroot.sh
 
 # Chroot and configure
 arch-chroot /mnt /bin/bash -c "chmod u+x After-chroot.sh && ./After-chroot.sh"
