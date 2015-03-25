@@ -32,15 +32,49 @@ export LANG=es_ES.UTF-8
 ########
 
 # Preparing storage devices
-mkfs.ext4 /dev/sda1
-mkfs.reiserfs /dev/sda2
+CORRECT="n"
+while [ ${CORRECT,,} == "n" ]
+do
+  read -p "Number of partitions: " PARTITIONS
+  declare -A mountpoints
+  for (( partition=1 ; partition<=$PARTITIONS ; partition++ ))
+  do
+    read -p "Type the partition (/dev/sdxn), a mountpoint (/,/home...) " PARTITION MOUNTPOINT
+    mountpoints["$PARTITION"]="$MOUNTPOINT"
+  done
+
+  for mountpoint in "${!mountpoints[@]}"; do echo "$mountpoint -> ${mountpoints["$mountpoint"]}"; done
+  read -p "Is this correct? (y/n) " CORRECT
+  while [ "${CORRECT,,}" != "y" ] && [ "${CORRECT,,}" != "n" ]
+  do
+    echo "I don't understand you."
+    read -p "I'm not responsible for any damage in your system. Do you agree? (y/n) " CORRECT
+  done
+
+  if [[ ! ${mountpoints["/"]} ]]
+  then
+    CORRECT="n"
+    echo "Not / partition found"
+  fi
+
+done
+
+for partition in "${!mountpoints[@]}"
+do
+  mkfs.ext4 $partition
+done
 ########
 
 # Mount the partitions
 echo "Mounting partitions..."
-mount /dev/sda1 /mnt
-mkdir /mnt/var
-mount /dev/sda2 /mnt/var
+mount ${mountpoints["/"]} /mnt
+unset mountpoints["/"]
+
+for mountpoint in "${!mountpoints[@]}"
+do
+  mkdir /mnt$mountpoint
+  mount ${mountpoints["$mountpoint"]} /mnt$mountpoint
+done
 
 # Select a mirror and update pacman database
 echo "Selecting the osl mirror and updating pacman database..."
