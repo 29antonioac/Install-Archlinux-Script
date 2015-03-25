@@ -1,6 +1,12 @@
 #!/bin/bash
 
 # This is an easy script for my own use. It reinstalls my Archlinux system faster.
+echo "This script is for reinstall my Archlinux system faster."
+read -p "I'm not responsible for any damage in your system. Do you agree? (y/n)" RESPONSE
+
+while [ ${RESPONSE,,} -ne "y" ] || [ ${RESPONSE,,} -ne "n" ]; do
+  echo "I don't understand you."
+  read -p "I'm not responsible for any damage in your system. Do you agree? (y/n)" RESPONSE
 
 # Set the keyboard layout
 echo "Loading es layout..."
@@ -42,7 +48,7 @@ pacstrap -i /mnt base base-devel --noconfirm
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 # Download chroot script
-wget http://goo.gl/SdQi6D -O /mnt/After-chroot.sh
+wget http://goo.gl/EVv7cm -O /mnt/After-chroot.sh
 
 # Chroot and configure
 arch-chroot /mnt /bin/bash -c "chmod u+x After-chroot.sh && ./After-chroot.sh"

@@ -37,7 +37,7 @@ echo $HOSTNAME > /etc/hostname
 
 # Check if user needs Wi-Fi
 read -p "Do you need Wi-Fi? (y/n): " WIFI
-while [ $WIFI -ne "y" ] || [ $WIFI -ne "n" ]; do
+while [ ${WIFI,,} -ne "y" ] || [ ${WIFI,,} -ne "n" ]; do
   echo "I don't understand you."
   read -p "Do you need Wi-Fi? (y/n): " WIFI
 
