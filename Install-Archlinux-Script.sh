@@ -33,7 +33,7 @@ export LANG=es_ES.UTF-8
 
 # Preparing storage devices
 CORRECT="n"
-ROOT="n"
+ROOT=""
 while [ ${CORRECT,,} == "n" ]
 do
   read -p "Number of partitions: " PARTITIONS
@@ -44,7 +44,7 @@ do
     mountpoints["$PARTITION"]="$MOUNTPOINT"
     if [ $MOUNTPOINT == "/" ]
     then
-      ROOT="y"
+      ROOT="$PARTITION"
     fi
   done
 
@@ -56,7 +56,7 @@ do
     read -p "I'm not responsible for any damage in your system. Do you agree? (y/n) " CORRECT
   done
 
-  if [ ${ROOT,,} == "n" ]
+  if [ ${ROOT,,} == "" ]
   then
     CORRECT="n"
     echo "Not / partition found"
@@ -72,13 +72,13 @@ done
 
 # Mount the partitions
 echo "Mounting partitions..."
-mount ${mountpoints["/"]} /mnt
-unset mountpoints["/"]
+mount $ROOT /mnt
+unset mountpoints[$ROOT]
 
-for mountpoint in "${mountpoints[@]}"
+for partition in "${!mountpoints[@]}"
 do
-  mkdir /mnt$mountpoint
-  mount ${mountpoints["$mountpoint"]} /mnt$mountpoint
+  mkdir /mnt${mountpoints["$partition"]}
+  mount $partition /mnt${mountpoints["$partition"]}
 done
 
 
