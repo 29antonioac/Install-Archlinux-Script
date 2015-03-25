@@ -44,9 +44,11 @@ do
   read -p "Do you need Wi-Fi? (y/n): " WIFI
 done
 
-if [ $WIFI -e "y" ]; then
+if [ $WIFI == "y" ]
+then
   echo "Installing wpa_supplicant and dialog for wifi-menu use..."
   pacman -S wpa_supplicant dialog --noconfirm
+fi
 
 # Configure the network
 ########
