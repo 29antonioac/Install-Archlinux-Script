@@ -2,11 +2,18 @@
 
 # This is an easy script for my own use. It reinstalls my Archlinux system faster.
 echo "This script is for reinstall my Archlinux system faster."
-read -p "I'm not responsible for any damage in your system. Do you agree? (y/n)" RESPONSE
+read -p "I'm not responsible for any damage in your system. Do you agree? (y/n) " RESPONSE
 
-while [ ${RESPONSE,,} -ne "y" ] || [ ${RESPONSE,,} -ne "n" ]; do
+while [ "${RESPONSE,,}" != "y" ] && [ "${RESPONSE,,}" != "n" ]
+do
   echo "I don't understand you."
-  read -p "I'm not responsible for any damage in your system. Do you agree? (y/n)" RESPONSE
+  read -p "I'm not responsible for any damage in your system. Do you agree? (y/n) " RESPONSE
+done
+
+if [ "${RESPONSE,,}" == "n" ]
+then
+  exit 1
+fi
 
 # Set the keyboard layout
 echo "Loading es layout..."
