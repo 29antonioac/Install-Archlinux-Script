@@ -33,6 +33,7 @@ export LANG=es_ES.UTF-8
 
 # Preparing storage devices
 CORRECT="n"
+ROOT="n"
 while [ ${CORRECT,,} == "n" ]
 do
   read -p "Number of partitions: " PARTITIONS
@@ -41,6 +42,10 @@ do
   do
     read -p "Type the partition (/dev/sdxn), a mountpoint (/,/home...) " PARTITION MOUNTPOINT
     mountpoints["$PARTITION"]="$MOUNTPOINT"
+    if [ $MOUNTPOINT == "/" ]
+    then
+      ROOT="y"
+    fi
   done
 
   for mountpoint in "${!mountpoints[@]}"; do echo "$mountpoint -> ${mountpoints["$mountpoint"]}"; done
@@ -51,7 +56,7 @@ do
     read -p "I'm not responsible for any damage in your system. Do you agree? (y/n) " CORRECT
   done
 
-  if [[ ! ${mountpoints["/"]} ]]
+  if [ ${ROOT,,} == "n" ]
   then
     CORRECT="n"
     echo "Not / partition found"
