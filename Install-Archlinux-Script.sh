@@ -75,11 +75,12 @@ echo "Mounting partitions..."
 mount ${mountpoints["/"]} /mnt
 unset mountpoints["/"]
 
-for mountpoint in "${!mountpoints[@]}"
+for mountpoint in "${mountpoints[@]}"
 do
   mkdir /mnt$mountpoint
   mount ${mountpoints["$mountpoint"]} /mnt$mountpoint
 done
+
 
 # Select a mirror and update pacman database
 echo "Selecting the osl mirror and updating pacman database..."
