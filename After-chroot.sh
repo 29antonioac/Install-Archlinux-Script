@@ -61,7 +61,16 @@ passwd
 
 # Install GRUB
 pacman -S grub os-prober --noconfirm
-grub-install --target=i386-pc --recheck /dev/sda
+
+read -p "Type the device (NOT PARTITION) where you want to install GRUB: " GRUBDISK
+
+while ! [ -e $GRUBDISK ]
+do
+  echo "That device not exists"
+  read -p "Type the device where you want to install GRUB: " GRUBDISK
+done
+
+grub-install --target=i386-pc --recheck $GRUBDISK
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Exit chroot
