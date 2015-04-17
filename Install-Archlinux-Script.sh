@@ -2,6 +2,7 @@
 
 # This is an easy script for my own use. It reinstalls my Archlinux system faster.
 echo "This script is for reinstall my Archlinux system faster."
+echo "It uses BIOS Legacy (not UEFI), ext4 partitions and Spanish layout, locale and mirror."
 read -p "I'm not responsible for any damage in your system. Do you agree? (y/n) " RESPONSE
 
 while [ "${RESPONSE,,}" != "y" ] && [ "${RESPONSE,,}" != "n" ]
