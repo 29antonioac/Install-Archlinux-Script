@@ -33,6 +33,9 @@ export LANG=es_ES.UTF-8
 ########
 
 # Preparing storage devices
+# First we show them
+lsblk
+
 CORRECT="n"
 ROOT=""
 while [ ${CORRECT,,} == "n" ]
