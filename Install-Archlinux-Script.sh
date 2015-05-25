@@ -57,7 +57,7 @@ do
   while [ "${CORRECT,,}" != "y" ] && [ "${CORRECT,,}" != "n" ]
   do
     echo "I don't understand you."
-    read -p "I'm not responsible for any damage in your system. Do you agree? (y/n) " CORRECT
+    read -p "Is this correct? (y/n) " CORRECT
   done
 
   if [ ${ROOT,,} == "" ]
