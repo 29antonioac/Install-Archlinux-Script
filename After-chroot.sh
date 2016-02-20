@@ -83,7 +83,7 @@ systemctl enable dkms
 sed -i.bak -e 's/#WIRELESS_REGDOM="ES"/WIRELESS_REGDOM="ES"/' /etc/conf.d/wireless-regdom
 
 # Build dkms modules
-dkms autoinstall
+#dkms autoinstall
 
 echo "Create a user and exit!"
 echo "useradd -m -g users -G wheel username"
