@@ -73,5 +73,17 @@ done
 grub-install --target=i386-pc --recheck $GRUBDISK
 grub-mkconfig -o /boot/grub/grub.cfg
 
+# Install more packages
+pacman -S alsa-utils nvidia-dkms crda plasma-meta linux-headers --noconfirm
+systemctl enable NetworkManager
+systemctl enable sddm
+systemctl enable dkms
+
+# Build dkms modules
+dkms autoinstall
+
+echo "Create a user and exit!"
+echo "useradd -m -g users -G wheel username"
+
 # Exit chroot
-exit
+#exit
