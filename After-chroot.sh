@@ -74,7 +74,7 @@ grub-install --target=i386-pc --recheck $GRUBDISK
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install more packages
-pacman -S wget dolphin konsole kdegraphics-okular iw wireless_tools alsa-utils nvidia-dkms crda plasma-meta linux-headers xorg-server xorg-server-utils --noconfirm
+pacman -S chromium kde-l10n-es wget dolphin konsole kdegraphics-okular iw wireless_tools alsa-utils nvidia-dkms crda plasma-meta linux-headers xorg-server xorg-server-utils --noconfirm
 systemctl enable NetworkManager
 systemctl enable sddm
 systemctl enable dkms
