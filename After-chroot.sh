@@ -74,10 +74,13 @@ grub-install --target=i386-pc --recheck $GRUBDISK
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install more packages
-pacman -S alsa-utils nvidia-dkms crda plasma-meta linux-headers xorg-server xorg-server-utils --noconfirm
+pacman -S iw wireless_tools alsa-utils nvidia-dkms crda plasma-meta linux-headers xorg-server xorg-server-utils --noconfirm
 systemctl enable NetworkManager
 systemctl enable sddm
 systemctl enable dkms
+
+# Set ES to wireless region
+sed -i.bak -e 's/#WIRELESS_REGDOM="ES"/WIRELESS_REGDOM="ES"/' /etc/conf.d/wireless-regdom
 
 # Build dkms modules
 dkms autoinstall
